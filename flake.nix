@@ -1,5 +1,6 @@
 {
-  description = "A haskell template";
+  # inspired by: https://youtu.be/FYTZkE5BZ-0
+  description = "music-maker";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
@@ -16,7 +17,7 @@
 
         haskellPackages = pkgs.haskellPackages;
 
-        packageName = "a-haskell-template";
+        packageName = "music-maker";
       in
       {
         packages.${packageName} =
@@ -33,6 +34,7 @@
           withHoogle = true;
 
           buildInputs = with haskellPackages; [
+            pkgs.ffmpeg_5-full  # for ffplay
             haskell-language-server
             ghcid
             cabal-install
