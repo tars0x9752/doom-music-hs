@@ -1,4 +1,5 @@
 .direnv
+output.bin
 
 dist
 dist-*
