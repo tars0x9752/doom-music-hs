@@ -1,9 +1,12 @@
-# music-maker
+# doom eternal theme music in haskell
 
-inspired by: https://youtu.be/FYTZkE5BZ-0
+Just for fun. :)
 
+> inspired by: https://youtu.be/FYTZkE5BZ-0
 
-```
+## Usage
+
+```sh
 # enter dev environment
 nix develop
 

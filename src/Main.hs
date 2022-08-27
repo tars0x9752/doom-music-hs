@@ -1,24 +1,24 @@
 module Main where
 
-import Core (outputFilePath, sampleRate, Pulse)
+import Core (sampleRate, Pulse)
 import qualified Data.ByteString.Builder as B
 import qualified Data.ByteString.Lazy as B
 import Data.Foldable (Foldable (fold))
-import Score (doom)
+import qualified Score
 import System.Process (runCommand)
 import Text.Printf (printf)
 
-score :: [Core.Pulse]
-score = Score.doom
+outputFilePath :: FilePath
+outputFilePath = "output.raw"
 
-save :: FilePath -> IO ()
-save filePath = B.writeFile filePath $ B.toLazyByteString $ foldMap B.floatLE score
+save :: FilePath -> [Core.Pulse] -> IO ()
+save filePath score = B.writeFile filePath $ B.toLazyByteString $ foldMap B.floatLE score
 
 play :: IO ()
 play = do
-  save outputFilePath
+  save outputFilePath Score.doom
   _ <- runCommand $ printf "ffplay -autoexit -showmode 1 -f f32le -ar %f %s" sampleRate outputFilePath
   return ()
 
 main :: IO ()
-main = save outputFilePath
+main = save outputFilePath Score.doom

@@ -14,9 +14,6 @@ type BPM = Float
 
 type Beats = Float
 
-outputFilePath :: FilePath
-outputFilePath = "output.bin"
-
 volume :: Float
 volume = 0.2
 
@@ -72,6 +69,13 @@ genNote bpm n octave beats = freq (calcNoteFreq semitone) (beatDuration bpm * be
     -- NOTE: https://pages.mtu.edu/~suits/NoteFreqCalcs.html
     calcNoteFreq :: Semitones -> Hz
     calcNoteFreq s = pitchStandard * (2 ** (1.0 / 12.0)) ** s
+
+genRest :: BPM -> Beats -> [Pulse]
+genRest bpm beats =
+  replicate len 0.0
+  where
+    duration = beatDuration bpm * beats * 4
+    len = length [0.0 .. sampleRate * duration]
 
 data NoteName = A | B | C | D | E | F | G
 
