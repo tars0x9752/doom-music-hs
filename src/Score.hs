@@ -1,12 +1,14 @@
 module Score where
 
-import Core (BPM, Pulse, aFl, bFl, cFl, d, dFl, eFl, f, fFl, g, gFl, genNote, genRest)
+import Core (BPM, Beats, NoteType, Octave, Pulse, aFl, bFl, cFl, d, dFl, eFl, f, fFl, g, gFl, genNote, genRest)
 
 bpm :: Core.BPM
 bpm = 103.0
 
+note :: Core.NoteType -> Core.Octave -> Core.Beats -> [Pulse]
 note = Core.genNote bpm
 
+rest :: Beats -> [Pulse]
 rest = Core.genRest bpm
 
 riff1 :: [Pulse]
@@ -55,6 +57,7 @@ riff2 =
       rest (1 / 16)
     ]
 
+lead1 :: [Pulse]
 lead1 =
   mconcat
     [ note eFl 2 (1 / 4),
@@ -80,6 +83,7 @@ lead1 =
       note d 2 (1 / 8 + 1 / 16)
     ]
 
+lead2 :: [Pulse]
 lead2 =
   mconcat
     [ note eFl 2 (1 / 4),
@@ -104,6 +108,9 @@ doom =
       lead2
     ]
 
+-- ----- Extras -----
+
+riffEx1 :: [Pulse]
 riffEx1 =
   mconcat
     [ note cFl 4 (1 / 8),
@@ -120,6 +127,7 @@ riffEx1 =
       note fFl 1 (1 / 8)
     ]
 
+riffEx2 :: [Pulse]
 riffEx2 =
   mconcat
     [ note eFl 3 (1 / 8),

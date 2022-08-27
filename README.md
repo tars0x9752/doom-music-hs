@@ -1,4 +1,4 @@
-# doom eternal theme music in haskell
+# Doom Eternal theme music in Haskell
 
 Just for fun. :)
 
