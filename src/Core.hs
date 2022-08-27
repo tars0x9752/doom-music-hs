@@ -43,7 +43,7 @@ freq hz duration =
 
     sine x = sin (x * step)
 
-    waveForm x = sin (sine x)
+    waveForm x = asin (sine x)
 
     output :: [Pulse]
     output = map waveForm [0.0 .. sampleRate * duration]
@@ -66,7 +66,7 @@ genNoteSemitone (NN name sign) =
 type Octave = Float
 
 genNote :: BPM -> NoteType -> Octave -> Beats -> [Pulse]
-genNote bpm n octave beats = freq (calcNoteFreq semitone) (beatDuration bpm / beats)
+genNote bpm n octave beats = freq (calcNoteFreq semitone) (beatDuration bpm * beats * 4)
   where
     semitone = genNoteSemitone n + (octave - 4) * 12
     -- NOTE: https://pages.mtu.edu/~suits/NoteFreqCalcs.html

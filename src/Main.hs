@@ -1,15 +1,18 @@
 module Main where
 
-import Core (outputFilePath, sampleRate)
+import Core (outputFilePath, sampleRate, Pulse)
 import qualified Data.ByteString.Builder as B
 import qualified Data.ByteString.Lazy as B
 import Data.Foldable (Foldable (fold))
-import Score (simple)
+import Score (doom)
 import System.Process (runCommand)
 import Text.Printf (printf)
 
+score :: [Core.Pulse]
+score = Score.doom
+
 save :: FilePath -> IO ()
-save filePath = B.writeFile filePath $ B.toLazyByteString $ foldMap B.floatLE simple
+save filePath = B.writeFile filePath $ B.toLazyByteString $ foldMap B.floatLE score
 
 play :: IO ()
 play = do
